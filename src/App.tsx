@@ -189,10 +189,10 @@ function App() {
         const ourServicesSectionTop = ourServicesSection.offsetTop
         const latestNewsSectionTop = latestNewsSection.offsetTop
         const ourClientsSectionTop = ourClientsSection.offsetTop
-        const ourLeadersSectionTop = ourLeadersSection.offsetTop
-        const infilitySectionTop = infilitySection.offsetTop
-        const whyChooseUsSectionTop = whyChooseUsSection.offsetTop
-        const stealthLockSectionTop = stealthLockSection.offsetTop
+        // const ourLeadersSectionTop = ourLeadersSection.offsetTop
+        // const infilitySectionTop = infilitySection.offsetTop
+        // const whyChooseUsSectionTop = whyChooseUsSection.offsetTop
+        // const stealthLockSectionTop = stealthLockSection.offsetTop
         const contactSectionTop = contactSection.offsetTop
         const viewportHeight = window.innerHeight
         const scrollMiddle = scrollTop + viewportHeight / 2
@@ -205,7 +205,7 @@ function App() {
         // Our Clients = Our Clients section
         // Contact = Contact section
         // Use scrollTop for more accurate detection, with scrollMiddle as fallback
-        const contactSectionHeight = contactSection.offsetHeight
+        // const contactSectionHeight = contactSection.offsetHeight
         
         // Check contact section first (most specific)
         if (scrollTop >= contactSectionTop - 100) {
@@ -524,7 +524,7 @@ function App() {
     const timeout5 = setTimeout(() => { setExactHeights(); forceScrollToTop(); startScrollWatch() }, 500)
 
     // Only prevent scroll on initial load, not during normal scrolling
-    const preventScroll = (e: Event) => {
+    const preventScroll = (_e: Event) => {
       // Only prevent if we're at the very top and trying to scroll up
       if (appRef.current && appRef.current.scrollTop === 0) {
         // Allow normal scrolling
