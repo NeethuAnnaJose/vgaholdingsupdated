@@ -28,7 +28,19 @@ function App() {
     let rafId: number | null = null
 
     const smoothScrollTo = (element: HTMLElement) => {
-      if (!appRef.current || isScrollingRef.current) return
+      if (!appRef.current) return
+      
+      // Cancel any ongoing scroll animation
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+      
+      // Don't start new scroll if already scrolling to same target
+      if (isScrollingRef.current) {
+        const currentTarget = (window as any).currentScrollTarget
+        if (currentTarget === element) return
+      }
       
       // Determine which section is being scrolled to and set active section immediately
       const sectionId = element.id
@@ -64,10 +76,11 @@ function App() {
       }
       
       isScrollingRef.current = true
+      ;(window as any).currentScrollTarget = element
       const startPosition = appRef.current.scrollTop
       const targetPosition = element.offsetTop
       const distance = targetPosition - startPosition
-      const duration = 1200 // Slower, smoother animation (increased from 800ms)
+      const duration = 800 // Optimized duration for smooth scrolling without glitches
       let startTime: number | null = null
 
       const easeInOutCubic = (t: number): number => {
@@ -80,6 +93,11 @@ function App() {
         const progress = Math.min(timeElapsed / duration, 1)
         const easedProgress = easeInOutCubic(progress)
 
+        if (appRef.current && !isScrollingRef.current) {
+          // If scroll was interrupted, stop animation
+          return
+        }
+
         if (appRef.current) {
           appRef.current.scrollTop = startPosition + distance * easedProgress
         }
@@ -87,7 +105,12 @@ function App() {
         if (progress < 1) {
           rafId = requestAnimationFrame(animateScroll)
         } else {
+          // Ensure we're exactly at the target
+          if (appRef.current) {
+            appRef.current.scrollTop = targetPosition
+          }
           isScrollingRef.current = false
+          ;(window as any).currentScrollTarget = null
           rafId = null
           // Ensure active section is set correctly after scroll completes
           setTimeout(() => {
@@ -117,10 +140,8 @@ function App() {
               setActiveSection('clients')
             } else if (sectionId === 'contact') {
               setActiveSection('contact')
-            } else if (sectionId === 'stealth-lock') {
-              setActiveSection('clients')
             }
-          }, 100)
+          }, 50)
         }
       }
 
@@ -135,7 +156,10 @@ function App() {
     let lastScrollDirection = 0
 
     const handleScroll = () => {
-      if (!appRef.current || isScrollingRef.current) return
+      if (!appRef.current) return
+      
+      // Don't interfere if we're in the middle of a programmatic scroll
+      if (isScrollingRef.current) return
 
       const currentScrollTop = appRef.current.scrollTop
       const now = Date.now()
@@ -158,9 +182,10 @@ function App() {
         clearTimeout(scrollTimeout)
       }
 
-      // Wait for scroll to settle before checking - optimized delay for better responsiveness
+      // Wait for scroll to settle before checking - reduced delay for smoother experience
       scrollTimeout = setTimeout(() => {
-        if (!appRef.current || isScrollingRef.current) return
+        if (!appRef.current) return
+        if (isScrollingRef.current) return
 
         const scrollTop = appRef.current.scrollTop
         const videoSection = videoSectionRef.current
@@ -237,8 +262,8 @@ function App() {
           }
         }
 
-        // Only check if scroll has settled (low velocity) - allow faster scrolling
-        if (scrollVelocity > 200) return // Don't snap if scrolling too fast
+        // Only check if scroll has settled (low velocity) - allow faster scrolling without glitches
+        if (scrollVelocity > 300) return // Don't snap if scrolling too fast (increased threshold for smoother experience)
 
         // Check if we're in the video section
         if (scrollTop >= videoSectionTop && scrollTop < whoWeAreSectionTop) {
@@ -389,7 +414,7 @@ function App() {
             smoothScrollTo(stealthLockSection)
           }
         }
-      }, 150) // Optimized delay for better responsiveness while preventing vigorous snapping
+      }, 100) // Reduced delay for smoother, more responsive scrolling
     }
 
     const appElement = appRef.current
@@ -436,12 +461,12 @@ function App() {
     const startScrollWatch = () => {
       if (scrollCheckInterval) clearInterval(scrollCheckInterval)
       
-      // Only force scroll to top during initial load (first 2 seconds)
+      // Only force scroll to top during initial load (first 1 second)
       const startTime = Date.now()
       scrollCheckInterval = setInterval(() => {
         const elapsed = Date.now() - startTime
-        if (elapsed > 2000) {
-          // After 2 seconds, stop forcing scroll to top
+        if (elapsed > 1000) {
+          // After 1 second, stop forcing scroll to top
           if (scrollCheckInterval) {
             clearInterval(scrollCheckInterval)
             scrollCheckInterval = null
@@ -450,11 +475,11 @@ function App() {
           return
         }
         
-        // Only force scroll to top if we're at the very beginning
-        if (appRef.current && appRef.current.scrollTop > 0 && appRef.current.scrollTop < 50 && !initialLoadComplete) {
+        // Only force scroll to top if we're at the very beginning and not scrolling
+        if (appRef.current && appRef.current.scrollTop > 0 && appRef.current.scrollTop < 50 && !initialLoadComplete && !isScrollingRef.current) {
           forceScrollToTop()
         }
-      }, 50) // Check every 50ms (less aggressive)
+      }, 100) // Check every 100ms (less aggressive, prevents glitches)
     }
 
     const setExactHeights = () => {
