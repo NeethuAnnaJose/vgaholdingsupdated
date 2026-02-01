@@ -4107,7 +4107,7 @@ section {
     min-height: 100vh !important;
     max-height: 100vh !important;
     padding: 0rem 1.5rem 0.5rem !important;
-    padding-top: calc(var(--header-height) - 10px) !important;
+    padding-top: calc(var(--header-height) - 25px) !important;
     padding-bottom: 0.5rem !important;
     align-items: flex-start;
     overflow: hidden !important;
@@ -4158,14 +4158,33 @@ section {
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.35rem 0.5rem 0.35rem;
-    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
     min-height: 0;
     flex: 1;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   .contact-content::-webkit-scrollbar {
-    display: none !important;
+    width: 4px;
+    display: block;
+  }
+
+  .contact-content::-webkit-scrollbar-track {
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 2px;
+  }
+
+  .contact-content::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.4);
+    border-radius: 2px;
+    transition: background 0.3s ease;
+  }
+
+  .contact-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.6);
   }
 
   .contact-item {
@@ -4290,7 +4309,7 @@ section {
     max-height: 100vh !important;
     max-height: 100dvh !important;
     padding: 0 0.75rem 0.2rem !important;
-    padding-top: calc(var(--header-height) - 8px) !important;
+    padding-top: calc(var(--header-height) - 20px) !important;
     padding-bottom: 0.2rem !important;
     align-items: flex-start;
     overflow: hidden !important;
@@ -4335,14 +4354,33 @@ section {
     flex-direction: column;
     gap: 0.4rem;
     padding: 0.25rem 0.35rem 0.25rem;
-    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
     min-height: 0;
     flex: 1;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   .contact-content::-webkit-scrollbar {
-    display: none !important;
+    width: 3px;
+    display: block;
+  }
+
+  .contact-content::-webkit-scrollbar-track {
+    background: rgba(212, 175, 55, 0.08);
+    border-radius: 1.5px;
+  }
+
+  .contact-content::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 1.5px;
+    transition: background 0.3s ease;
+  }
+
+  .contact-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.5);
   }
 
   .contact-item {
