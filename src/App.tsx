@@ -634,7 +634,7 @@ function App() {
         </div>
       </section>
 
-      <section className="what-we-do" id="services" ref={whatWeDoSectionRef}>
+      <section className="what-we-do" id="what-we-do" ref={whatWeDoSectionRef}>
         <div className="what-we-do-container">
           <h2 className="section-heading">What We Do</h2>
           
