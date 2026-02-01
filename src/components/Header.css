@@ -8,6 +8,7 @@
   box-shadow: 0 2px 30px rgba(212, 175, 55, 0.15);
   z-index: 1000;
   backdrop-filter: blur(10px);
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .header::before {
