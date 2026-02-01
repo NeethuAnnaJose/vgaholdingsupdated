@@ -4103,30 +4103,29 @@ section {
 
 @media (max-width: 768px) {
   .contact {
-    height: 100vh !important;
-    min-height: 100vh !important;
-    max-height: 100vh !important;
-    padding: 0rem 1.5rem 0.5rem !important;
-    padding-top: calc(var(--header-height) - 25px) !important;
-    padding-bottom: 0.5rem !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    padding: calc(var(--header-height) + 0.75rem) 1rem 0.75rem !important;
     align-items: flex-start;
-    overflow: hidden !important;
+    overflow: visible !important;
     background: linear-gradient(180deg, #ffffff 0%, #fafafa 30%, #ffffff 100%) !important;
   }
 
   .contact-container {
-    padding: 0.3rem 0 0.3rem;
-    height: 100%;
+    padding: 0;
+    height: auto;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     justify-content: flex-start;
+    gap: 0;
   }
 
   .contact-container .section-heading {
-    margin-bottom: 0.8rem !important;
-    padding-bottom: 0.2rem;
+    margin: 0 0 0.5rem 0 !important;
+    padding: 0 0 0.25rem 0 !important;
     flex-shrink: 0;
     display: block !important;
     visibility: visible !important;
@@ -4143,6 +4142,7 @@ section {
   .contact-container .section-heading::after {
     width: 80px;
     height: 3px;
+    margin-top: 0.25rem;
     background: linear-gradient(90deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
     animation: shimmer 3s ease-in-out infinite;
@@ -4157,79 +4157,68 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    gap: 0.3rem;
-    padding: 0.2rem 0.5rem 0.05rem;
-    overflow-y: auto;
-    overflow-x: hidden;
+    gap: 0.5rem;
+    padding: 0.5rem 0 0;
+    overflow: visible;
     min-height: 0;
-    flex: 1;
+    flex: none;
     justify-content: flex-start;
-    align-items: center;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    align-items: stretch;
   }
 
   .contact-content::-webkit-scrollbar {
-    width: 4px;
-    display: block;
+    width: 0px;
+    display: none;
   }
 
   .contact-content::-webkit-scrollbar-track {
-    background: rgba(212, 175, 55, 0.1);
-    border-radius: 2px;
+    display: none;
   }
 
   .contact-content::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.4);
-    border-radius: 2px;
-    transition: background 0.3s ease;
-  }
-
-  .contact-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.6);
+    display: none;
   }
 
   .contact-item {
     display: flex;
     flex-direction: row;
     align-items: center;
-    text-align: center;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 0.4rem 0.7rem;
+    text-align: left;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
     max-width: 100%;
     width: 100%;
-    min-height: auto;
+    min-height: 72px;
     flex-shrink: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(252, 252, 252, 0.95) 100%);
-    border: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.99) 0%, rgba(250, 250, 250, 0.98) 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.15), 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(12px);
   }
 
   .contact-item:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
-    justify-self: flex-start;
     text-align: left;
   }
 
   .contact-item:nth-child(2) {
     grid-column: 2;
     grid-row: 1;
-    justify-self: flex-end;
     text-align: left;
   }
 
   .contact-item:nth-child(3) {
     grid-column: 1 / -1;
     grid-row: 2;
-    justify-self: center;
-    max-width: 280px;
+    justify-self: stretch;
     text-align: center;
+    flex-direction: column;
   }
 
   .contact-item::before {
@@ -4238,22 +4227,39 @@ section {
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 3px;
     background: linear-gradient(90deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
     opacity: 0;
     transition: all 0.4s ease;
   }
 
+  .contact-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%, rgba(212, 175, 55, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
   .contact-item:hover {
-    border-color: rgba(212, 175, 55, 0.6);
+    border-color: rgba(212, 175, 55, 0.7);
     background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(250, 250, 250, 1) 100%);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.25), 0 5px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 5px 18px rgba(212, 175, 55, 0.25), 0 2px 10px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px) scale(1.01);
   }
 
   .contact-item:hover::before {
     opacity: 1;
     animation: slideIn 0.6s ease-out;
+  }
+
+  .contact-item:hover::after {
+    opacity: 1;
   }
 
   @keyframes slideIn {
@@ -4262,30 +4268,45 @@ section {
   }
 
   .contact-icon {
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
-    border-radius: 50%;
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border: 2px solid rgba(212, 175, 55, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 3px 12px rgba(212, 175, 55, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .contact-item:hover .contact-icon {
     border-color: rgba(212, 175, 55, 0.6);
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
-    transform: translateY(-3px) scale(1.1) rotate(5deg);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-1px) scale(1.05) rotate(1deg);
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  .contact-item:hover .contact-icon::before {
+    opacity: 1;
   }
 
   .contact-info {
     align-items: flex-start;
     text-align: left;
-    gap: 0.1rem;
+    gap: 0.2rem;
     min-width: 0;
     flex: 1;
   }
@@ -4293,6 +4314,11 @@ section {
   .contact-item:nth-child(3) .contact-info {
     align-items: center;
     text-align: center;
+  }
+
+  .contact-item:nth-child(3) {
+    flex-direction: column;
+    padding: 0.75rem;
   }
 
   .contact-label {
@@ -4311,27 +4337,18 @@ section {
     color: rgba(26, 26, 26, 0.9);
     margin: 0;
     font-weight: 500;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
 
   .contact-footer {
-    padding: 0.5rem 0.6rem;
-    margin-top: 0.05rem;
-    margin-bottom: 0.05rem;
+    padding: 0.5rem 0.75rem;
+    margin-top: 0.5rem;
     flex-shrink: 0;
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.15));
-    border-top: 2px solid rgba(212, 175, 55, 0.4);
-    border-radius: 6px 6px 0 0;
-    box-shadow: 0 -2px 8px rgba(212, 175, 55, 0.15);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.2));
+    border-top: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 10px;
+    box-shadow: 0 -1px 8px rgba(212, 175, 55, 0.12);
     text-align: center;
-    align-self: center;
-    max-width: 260px;
-    width: 100%;
+    align-self: stretch;
   }
 
   .contact-copyright {
@@ -4346,33 +4363,28 @@ section {
 
 @media (max-width: 480px) {
   .contact {
-    height: 100vh !important;
-    height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    max-height: 100vh !important;
-    max-height: 100dvh !important;
-    padding: 0 0.75rem 0.2rem !important;
-    padding-top: calc(var(--header-height) - 20px) !important;
-    padding-bottom: 0.2rem !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    padding: calc(var(--header-height) + 0.5rem) 0.75rem 0.5rem !important;
     align-items: flex-start;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   .contact-container {
-    padding: 0.2rem 0 0.2rem !important;
-    height: 100%;
+    padding: 0 !important;
+    height: auto;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     justify-content: flex-start;
   }
 
   .contact-container .section-heading {
     margin: 0 0 0.4rem 0 !important;
-    padding: 0 0 0.1rem 0 !important;
-    font-size: 1.4rem !important;
+    padding: 0 !important;
+    font-size: 1.35rem !important;
     flex-shrink: 0;
     display: block !important;
     visibility: visible !important;
@@ -4397,53 +4409,73 @@ section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    gap: 0.2rem;
-    padding: 0.1rem 0.3rem 0.05rem;
-    overflow-y: auto;
-    overflow-x: hidden;
+    gap: 0.4rem;
+    padding: 0.4rem 0 0;
+    overflow: visible;
     min-height: 0;
-    flex: 1;
+    flex: none;
     justify-content: flex-start;
-    align-items: center;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    align-items: stretch;
   }
 
   .contact-content::-webkit-scrollbar {
-    width: 3px;
-    display: block;
+    width: 0px;
+    display: none;
   }
 
   .contact-content::-webkit-scrollbar-track {
-    background: rgba(212, 175, 55, 0.08);
-    border-radius: 1.5px;
+    display: none;
   }
 
   .contact-content::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.3);
-    border-radius: 1.5px;
-    transition: background 0.3s ease;
-  }
-
-  .contact-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.5);
+    display: none;
   }
 
   .contact-item {
     display: flex;
     flex-direction: row;
     align-items: center;
-    text-align: center;
-    justify-content: center;
-    gap: 0.3rem;
-    padding: 0.2rem 0.4rem;
+    text-align: left;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    padding: 0.5rem 0.6rem;
     max-width: 100%;
     width: 100%;
-    min-height: auto;
+    min-height: 58px;
     flex-shrink: 0;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.99) 0%, rgba(250, 250, 250, 0.98) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(212, 175, 55, 0.2), 0 1px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .contact-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d4af37, #ffd700, #d4af37, transparent);
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .contact-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 50%, rgba(212, 175, 55, 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
   }
 
   .contact-item:nth-child(1) {
@@ -4469,9 +4501,28 @@ section {
   }
 
   .contact-icon {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
   .contact-info {
@@ -4494,26 +4545,20 @@ section {
   .contact-value {
     font-size: 0.65rem;
     line-height: 1.25;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
 
   .contact-footer {
-    padding: 0.6rem 0.75rem;
-    margin-top: 0.1rem;
-    margin-bottom: 0.1rem;
+    padding: 0.5rem 0.7rem;
+    margin-top: 0.02rem;
+    margin-bottom: 0.05rem;
     flex-shrink: 0;
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.12));
-    border-top: 2px solid rgba(212, 175, 55, 0.3);
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 -2px 10px rgba(212, 175, 55, 0.1);
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.18));
+    border-top: 2px solid rgba(212, 175, 55, 0.4);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -3px 12px rgba(212, 175, 55, 0.15);
     text-align: center;
     align-self: center;
-    max-width: 300px;
+    max-width: 320px;
     width: 100%;
   }
 
