@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import './App.css'
 
 function App() {
+  const location = useLocation()
   const [activeSection, setActiveSection] = useState('home')
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
   const [activeClientCategory, setActiveClientCategory] = useState('all')
@@ -588,6 +590,26 @@ function App() {
     }
   }, [])
 
+  // Scroll to hash section when navigating from article page (e.g. /#news)
+  useEffect(() => {
+    const hash = location.hash?.slice(1)
+    if (hash && appRef.current) {
+      const scrollToSection = () => {
+        const section = document.getElementById(hash)
+        if (section) {
+          if ((window as any).smoothScrollToSection) {
+            (window as any).smoothScrollToSection(section)
+          } else {
+            appRef.current?.scrollTo({ top: section.offsetTop, behavior: 'smooth' })
+          }
+        }
+      }
+      // Delay to allow layout/section heights to be set
+      const timer = setTimeout(scrollToSection, 400)
+      return () => clearTimeout(timer)
+    }
+  }, [location.pathname, location.hash])
+
   return (
     <div className="app" ref={appRef}>
       <Header activeSection={activeSection} />
@@ -1008,14 +1030,12 @@ function App() {
                 <p className="news-card-text">
                   Tap on the "Read More" tab to read our story.
                 </p>
-                <a 
-                  href="https://vgaholdings.com/latest-news-01/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/latest-news/greek-street-sold" 
                   className="news-read-more-btn"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -1035,14 +1055,12 @@ function App() {
                 <p className="news-card-text">
                   Tap on the "Read More" tab to watch the full interviews and see how their dream became a reality.
                 </p>
-                <a 
-                  href="https://vgaholdings.com/latest-news-02/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/latest-news/greek-street-tv" 
                   className="news-read-more-btn"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -1062,14 +1080,12 @@ function App() {
                 <p className="news-card-text">
                   Tap on the "Read More" tab to read more about our unique products.
                 </p>
-                <a 
-                  href="https://vgaholdings.com/latest-news-03/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/latest-news/carbontech" 
                   className="news-read-more-btn"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -1086,14 +1102,12 @@ function App() {
                 <p className="news-card-text">
                   VGA and Arthur D. Little sign an agreement in Saudi to provide excellent consultancy and planning services for a large Insurance firm. Part of our scope of work is to re-define the insurance industry using maximum optimization, strategic planning and reconfiguration. 
                 </p>
-                <a 
-                  href="https://vgaholdings.com/latest-news-04/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/latest-news/arthur-little" 
                   className="news-read-more-btn"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -1110,14 +1124,12 @@ function App() {
                 <p className="news-card-text">
                   Automation, remote-control, data capture, stabilizer modules – this new generation of the Stealth-Lock pipeline connection technology is the product of innovation and ingenuity fueled by multimillion-dollar R&D investment. In other words the Ferrari of pipelines.
                 </p>
-                <a 
-                  href="https://vgaholdings.com/latest-news-05/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/latest-news/stealth-lock" 
                   className="news-read-more-btn"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -1134,14 +1146,12 @@ function App() {
                 <p className="news-card-text">
                   After 4 years of relationship development, field trials, end-user qualifications and contractual negotiations, AGODCO and TENARIS, one of the worlds largest tubular goods manufacturers, inked their deal to speed up pipeline installations in Latin America.
                 </p>
-                <a 
-                  href="https://vgaholdings.com/latest-news-06/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  to="/latest-news/tenaris" 
                   className="news-read-more-btn"
                 >
                   Read More
-                </a>
+                </Link>
               </div>
             </div>
           </div>

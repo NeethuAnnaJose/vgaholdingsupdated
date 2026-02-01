@@ -39,6 +39,12 @@
   position: relative;
 }
 
+.logo-container a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
 .logo-container {
   display: flex;
   align-items: center;

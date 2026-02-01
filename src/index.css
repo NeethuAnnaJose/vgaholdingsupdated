@@ -50,3 +50,26 @@ body {
 #root * {
   scroll-behavior: auto;
 }
+
+/* Article page - enable normal document scroll when viewing article pages */
+html.article-page-active,
+body.article-page-active {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh;
+  background: #f8f7f4 !important;
+}
+
+#root.article-page-active {
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 100vh;
+}
+
+.article-page-scroll-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import './Header.css'
 
 interface HeaderProps {
@@ -7,6 +8,8 @@ interface HeaderProps {
 
 const Header = ({ activeSection = 'home' }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+  const isArticlePage = location.pathname !== '/'
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -20,7 +23,6 @@ const Header = ({ activeSection = 'home' }: HeaderProps) => {
     e.preventDefault()
     closeMenu()
     
-    // Wait a bit for menu to close on mobile
     setTimeout(() => {
       const section = document.querySelector(href) as HTMLElement
       if (section && (window as any).smoothScrollToSection) {
@@ -30,32 +32,44 @@ const Header = ({ activeSection = 'home' }: HeaderProps) => {
   }
 
   const menuItems = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About Us', href: '#about', id: 'about' },
-    { name: 'Services', href: '#services', id: 'services' },
-    { name: 'News', href: '#news', id: 'news' },
-    { name: 'Our Clients', href: '#clients', id: 'clients' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'Home', href: '#home', path: '/', id: 'home' },
+    { name: 'About Us', href: '#about', path: '/#about', id: 'about' },
+    { name: 'Services', href: '#services', path: '/#services', id: 'services' },
+    { name: 'News', href: '#news', path: '/#news', id: 'news' },
+    { name: 'Our Clients', href: '#clients', path: '/#clients', id: 'clients' },
+    { name: 'Contact', href: '#contact', path: '/#contact', id: 'contact' },
   ]
 
   return (
     <header className="header">
       <div className="header-container">
         <div className="logo-container">
-          <img src="/vgalogo.png" alt="VGA Holdings Logo" className="logo" />
+          <Link to="/">
+            <img src="/vgalogo.png" alt="VGA Holdings Logo" className="logo" />
+          </Link>
         </div>
 
         <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>
           <ul className="nav-list">
             {menuItems.map((item) => (
               <li key={item.name} className="nav-item">
-                <a 
-                  href={item.href} 
-                  className={`nav-link ${activeSection === item.id ? 'nav-link-active' : ''}`}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.name}
-                </a>
+                {isArticlePage ? (
+                  <Link 
+                    to={item.path}
+                    className={`nav-link ${activeSection === item.id ? 'nav-link-active' : ''}`}
+                    onClick={closeMenu}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a 
+                    href={item.href} 
+                    className={`nav-link ${activeSection === item.id ? 'nav-link-active' : ''}`}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
+                    {item.name}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
