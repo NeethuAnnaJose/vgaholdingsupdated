@@ -285,21 +285,25 @@
   gap: 1.5rem;
   margin-top: 2.5rem;
   width: 100%;
+  align-items: stretch;
 }
 
 .news-article-stealth-image {
   width: 100%;
+  min-height: 0;
   border-radius: 12px;
   overflow: hidden;
   background: #faf9f7;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  aspect-ratio: 16 / 9;
 }
 
 .news-article-stealth-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {

@@ -1600,7 +1600,12 @@ function App() {
           </div>
 
           <div className="contact-footer">
-            <p className="contact-copyright">©Copyright VGA Holdings 2024. Design by VGA</p>
+            <div className="contact-footer-content">
+              <span className="contact-copyright-symbol">©</span>
+              <span className="contact-copyright-text">Copyright VGA Holdings 2026</span>
+              <span className="contact-copyright-divider">•</span>
+              <span className="contact-copyright-credit">Designed by VGA</span>
+            </div>
           </div>
         </div>
       </section>
