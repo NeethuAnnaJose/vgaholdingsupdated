@@ -1,5 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
+/* Detect iOS for mobile-specific fixes (iPhone/iPad) - does not affect Android */
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+if (isIOS) {
+  document.documentElement.classList.add('ios')
+}
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.tsx'
 import NewsArticle from './pages/NewsArticle.tsx'

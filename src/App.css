@@ -36,13 +36,6 @@ section {
   height: 0;
 }
 
-/* iOS: use proximity snap on mobile to allow nested scroll in Who We Are */
-@media (max-width: 768px) {
-  .app {
-    scroll-snap-type: y proximity;
-  }
-}
-
 .app * {
   scroll-behavior: smooth;
 }
@@ -245,11 +238,6 @@ section {
   box-sizing: border-box;
   position: relative;
   z-index: 2;
-}
-
-/* Desktop: scroll wrapper is transparent for layout */
-.who-we-are-scroll {
-  display: contents;
 }
 
 /* Unified content card - text and image as one block */
@@ -505,18 +493,13 @@ section {
 @media (max-width: 768px) {
   .who-we-are {
     height: 100vh !important;
-    height: 100dvh !important;
     min-height: 100vh !important;
-    min-height: 100dvh !important;
     max-height: 100vh !important;
-    max-height: 100dvh !important;
     padding: 0 1rem !important;
     padding-top: calc(0.75rem + var(--header-height)) !important;
     display: flex !important;
     flex-direction: column !important;
     overflow: hidden !important;
-    /* iOS Safari: prevent overflow from 100vh including browser chrome */
-    position: relative;
   }
 
   .who-we-are-container {
@@ -526,8 +509,6 @@ section {
     min-height: 0;
     overflow: hidden;
     padding: 0.5rem 0 1rem;
-    position: relative;
-    -webkit-flex: 1 1 0%;
   }
 
   .who-we-are-container .section-heading {
@@ -536,48 +517,35 @@ section {
   }
 
   .who-we-are-content {
-    flex: 1 1 0%;
+    flex: 1;
     min-height: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .who-we-are-scroll {
-    flex: 1 1 0%;
-    min-height: 0;
-    min-width: 0;
-    overflow-y: scroll !important;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     grid-template-areas: "image" "divider" "text";
     grid-template-rows: auto auto auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
     padding: 2px;
   }
 
-  .who-we-are-scroll::-webkit-scrollbar {
+  .who-we-are-content::-webkit-scrollbar {
     width: 6px;
   }
 
-  .who-we-are-scroll::-webkit-scrollbar-track {
+  .who-we-are-content::-webkit-scrollbar-track {
     background: rgba(212, 175, 55, 0.08);
     border-radius: 3px;
   }
 
-  .who-we-are-scroll::-webkit-scrollbar-thumb {
+  .who-we-are-content::-webkit-scrollbar-thumb {
     background: rgba(212, 175, 55, 0.35);
     border-radius: 3px;
   }
 
-  .who-we-are-scroll::-webkit-scrollbar-thumb:hover {
+  .who-we-are-content::-webkit-scrollbar-thumb:hover {
     background: rgba(212, 175, 55, 0.5);
   }
 
@@ -585,25 +553,13 @@ section {
     padding: 1.75rem 1.5rem 2rem 1.5rem;
     gap: 1.25rem;
     min-height: min-content;
-    min-width: 0;
-  }
-
-  .who-we-are .intro-text {
-    overflow: visible;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-  }
-
-  .who-we-are .goal-text {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
   }
 
   .who-we-are-divider {
     width: 100%;
     height: 1px;
     min-width: unset;
-    margin: 1.25rem 1.5rem;
+    margin: 0 1.5rem;
     flex-shrink: 0;
     background: linear-gradient(90deg, 
       transparent 0%, 
@@ -674,7 +630,7 @@ section {
   }
 
   .who-we-are-divider {
-    margin: 1rem 1.25rem;
+    margin: 0 1.25rem;
   }
 
   .who-we-are .intro-drop {
@@ -1863,9 +1819,10 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  flex: 1 1 auto;
-  min-height: min-content;
+  flex: 1;
+  min-height: 0;
   overflow: visible;
+  justify-content: space-between;
   align-items: stretch;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1885,14 +1842,13 @@ section {
 
 .news-card-text {
   font-size: 0.9rem;
-  line-height: 1.65;
+  line-height: 1.6;
   color: rgba(26, 26, 26, 0.9);
   margin: 0;
   text-align: left;
-  flex: 1 1 auto;
-  min-height: min-content;
+  flex: 1;
+  min-height: 0;
   overflow: visible;
-  padding-bottom: 0.125em;
 }
 
 .news-read-more-btn {
@@ -2048,11 +2004,8 @@ section {
 @media (max-width: 768px) {
   .latest-news {
     height: 100vh !important;
-    height: 100dvh !important;
     min-height: 100vh !important;
-    min-height: 100dvh !important;
     max-height: 100vh !important;
-    max-height: 100dvh !important;
     padding: 0.5rem !important;
     padding-top: calc(0.5rem + var(--header-height)) !important;
   }
@@ -2099,7 +2052,7 @@ section {
   }
   
   .news-card {
-    min-height: auto !important;
+    min-height: 400px !important;
     height: auto !important;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 248, 248, 0.98) 100%);
     border: 1px solid rgba(212, 175, 55, 0.3);
@@ -2141,8 +2094,8 @@ section {
   .news-card {
     padding: 0.75rem;
     gap: 0.625rem;
-    height: auto !important;
-    min-height: auto !important;
+    height: auto;
+    min-height: fit-content;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -2165,8 +2118,8 @@ section {
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
-    flex: 1 1 auto;
-    min-height: min-content;
+    flex: 1;
+    min-height: 0;
     overflow: visible;
   }
 
@@ -2185,8 +2138,8 @@ section {
     line-height: 1.6;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    flex: 1 1 auto;
-    min-height: min-content;
+    flex: 1;
+    min-height: 0;
     overflow: visible;
     color: rgba(26, 26, 26, 0.9) !important;
   }
@@ -2207,11 +2160,8 @@ section {
 @media (max-width: 480px) {
   .latest-news {
     height: 100vh !important;
-    height: 100dvh !important;
     min-height: 100vh !important;
-    min-height: 100dvh !important;
     max-height: 100vh !important;
-    max-height: 100dvh !important;
     padding: 0.375rem !important;
     padding-top: calc(0.375rem + var(--header-height)) !important;
   }
@@ -2257,7 +2207,7 @@ section {
   }
   
   .news-card {
-    min-height: auto !important;
+    min-height: 420px !important;
     max-height: none !important;
     height: auto !important;
   }
@@ -2286,7 +2236,7 @@ section {
     padding: 0.75rem;
     gap: 0.625rem;
     height: auto !important;
-    min-height: auto !important;
+    min-height: 420px !important;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -2323,8 +2273,8 @@ section {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    flex: 1 1 auto;
-    min-height: min-content;
+    flex: 1;
+    min-height: 0;
     overflow: visible;
   }
 
@@ -2344,8 +2294,8 @@ section {
     line-height: 1.5;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    flex: 1 1 auto;
-    min-height: min-content;
+    flex: 1;
+    min-height: 0;
     overflow: visible;
     color: rgba(26, 26, 26, 0.9) !important;
   }
@@ -4893,3 +4843,72 @@ section {
     font-size: 0.7rem;
   }
 }
+
+/* ============================================
+   iOS-only fixes (iPhone/iPad) - does NOT affect Android
+   Uses html.ios class set by main.tsx
+   ============================================ */
+@media (max-width: 768px) {
+  html.ios .app {
+    height: 100dvh;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+    scroll-snap-type: y proximity;
+  }
+
+  html.ios .who-we-are {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: -webkit-fill-available;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html.ios .who-we-are-container {
+    -webkit-flex: 1 1 0%;
+    flex: 1 1 0%;
+  }
+
+  html.ios .who-we-are-content {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    min-width: 0;
+  }
+
+  html.ios .who-we-are-text {
+    min-width: 0;
+  }
+
+  html.ios .who-we-are .intro-text,
+  html.ios .who-we-are .goal-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  html.ios .who-we-are-divider {
+    margin: 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html.ios .who-we-are-divider {
+    margin: 1.25rem 1.25rem;
+  }
+}
+
+/* iOS: ensure scroll containers work properly */
+@media (max-width: 768px) {
+  html.ios .cards-container,
+  html.ios .news-cards-container {
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
