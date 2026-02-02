@@ -36,6 +36,13 @@ section {
   height: 0;
 }
 
+/* iOS: use proximity snap on mobile to allow nested scroll in Who We Are */
+@media (max-width: 768px) {
+  .app {
+    scroll-snap-type: y proximity;
+  }
+}
+
 .app * {
   scroll-behavior: smooth;
 }
@@ -238,6 +245,11 @@ section {
   box-sizing: border-box;
   position: relative;
   z-index: 2;
+}
+
+/* Desktop: scroll wrapper is transparent for layout */
+.who-we-are-scroll {
+  display: contents;
 }
 
 /* Unified content card - text and image as one block */
@@ -514,8 +526,8 @@ section {
     min-height: 0;
     overflow: hidden;
     padding: 0.5rem 0 1rem;
-    /* iOS: ensure flex child can shrink */
-    -webkit-flex: 1 1 0;
+    position: relative;
+    -webkit-flex: 1 1 0%;
   }
 
   .who-we-are-container .section-heading {
@@ -524,41 +536,48 @@ section {
   }
 
   .who-we-are-content {
-    flex: 1;
+    flex: 1 1 0%;
     min-height: 0;
-    display: grid;
-    grid-template-columns: 1fr !important;
-    grid-template-areas: "image" "divider" "text";
-    grid-template-rows: auto auto auto;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .who-we-are-scroll {
+    flex: 1 1 0%;
+    min-height: 0;
+    min-width: 0;
+    overflow-y: scroll !important;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    /* iOS: create stacking context for reliable scroll */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* iOS: ensure scroll container gets height */
-    position: relative;
-    -webkit-flex: 1 1 0;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "image" "divider" "text";
+    grid-template-rows: auto auto auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
     padding: 2px;
   }
 
-  .who-we-are-content::-webkit-scrollbar {
+  .who-we-are-scroll::-webkit-scrollbar {
     width: 6px;
   }
 
-  .who-we-are-content::-webkit-scrollbar-track {
+  .who-we-are-scroll::-webkit-scrollbar-track {
     background: rgba(212, 175, 55, 0.08);
     border-radius: 3px;
   }
 
-  .who-we-are-content::-webkit-scrollbar-thumb {
+  .who-we-are-scroll::-webkit-scrollbar-thumb {
     background: rgba(212, 175, 55, 0.35);
     border-radius: 3px;
   }
 
-  .who-we-are-content::-webkit-scrollbar-thumb:hover {
+  .who-we-are-scroll::-webkit-scrollbar-thumb:hover {
     background: rgba(212, 175, 55, 0.5);
   }
 
@@ -566,18 +585,25 @@ section {
     padding: 1.75rem 1.5rem 2rem 1.5rem;
     gap: 1.25rem;
     min-height: min-content;
+    min-width: 0;
   }
 
-  /* iOS: contain float so drop-cap doesn't cause layout/clipping issues */
   .who-we-are .intro-text {
-    overflow: hidden;
+    overflow: visible;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .who-we-are .goal-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .who-we-are-divider {
     width: 100%;
     height: 1px;
     min-width: unset;
-    margin: 0 1.5rem;
+    margin: 1.25rem 1.5rem;
     flex-shrink: 0;
     background: linear-gradient(90deg, 
       transparent 0%, 
@@ -648,7 +674,7 @@ section {
   }
 
   .who-we-are-divider {
-    margin: 0 1.25rem;
+    margin: 1rem 1.25rem;
   }
 
   .who-we-are .intro-drop {

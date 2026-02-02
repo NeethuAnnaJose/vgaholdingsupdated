@@ -636,6 +636,7 @@ function App() {
           <h2 className="section-heading">Who We Are</h2>
 
           <div className="who-we-are-content">
+            <div className="who-we-are-scroll">
             <div className="who-we-are-text">
               <p className="intro-text">
                 <span className="intro-drop">V</span>GA was established in 2014 in the Kingdom of Bahrain. We engage in a variety of sectors, such as Brokerage, Consultancy, Chemical Distribution, Oil and Gas Pipeline Services and various other investment portfolios.
@@ -658,6 +659,7 @@ function App() {
                   className="team-image"
                 />
               </div>
+            </div>
             </div>
           </div>
         </div>
