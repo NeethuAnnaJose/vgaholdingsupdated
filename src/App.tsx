@@ -631,26 +631,33 @@ function App() {
       </section>
 
       <section className="who-we-are" id="about" ref={whoWeAreSectionRef}>
+        <div className="who-we-are-bg-accent" aria-hidden="true" />
         <div className="who-we-are-container">
           <h2 className="section-heading">Who We Are</h2>
-          
+
           <div className="who-we-are-content">
             <div className="who-we-are-text">
               <p className="intro-text">
-               VGA was established in 2014 in the Kingdom of Bahrain. We engage in a variety of sectors, such as Brokerage, Consultancy, Chemical Distribution, Oil and Gas Pipeline Services and various other investment portfolios.</p>
-              
+                <span className="intro-drop">V</span>GA was established in 2014 in the Kingdom of Bahrain. We engage in a variety of sectors, such as Brokerage, Consultancy, Chemical Distribution, Oil and Gas Pipeline Services and various other investment portfolios.
+              </p>
               <p className="goal-text">
-                Goal setting is a powerful process for thinking about your ideal future and for motivating yourself to turn your vision of this future into reality and VGA has the skills and the knowledge to help you do so.  </p>
-
-              <h3 className="team-heading">The VGA Team</h3>
+                Goal setting is a powerful process for thinking about your ideal future and for motivating yourself to turn your vision of this future into reality and VGA has the skills and the knowledge to help you do so.
+              </p>
+              <div className="who-we-are-team-cta">
+                <span className="team-heading">The VGA Team</span>
+              </div>
             </div>
 
-            <div className="who-we-are-image">
-              <img 
-                src="/updatedwhoweare.jpg" 
-                alt="VGA Holdings Team" 
-                className="team-image"
-              />
+            <div className="who-we-are-divider" aria-hidden="true" />
+
+            <div className="who-we-are-image-wrap">
+              <div className="who-we-are-image-frame">
+                <img
+                  src="/updatedwhoweare.jpg"
+                  alt="VGA Holdings Team"
+                  className="team-image"
+                />
+              </div>
             </div>
           </div>
         </div>
